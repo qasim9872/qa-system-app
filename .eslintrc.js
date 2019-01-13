@@ -8,9 +8,36 @@ module.exports = {
     parser: 'babel-eslint'
   },
   extends: [
-    'plugin:vue/recommended',
-    'plugin:prettier/recommended'
+    "plugin:vue/recommended",
+    "eslint:recommended",
+    "plugin:prettier/recommended"
+    // "prettier/vue"
   ],
+  rules: {
+    "vue/component-name-in-template-casing": [
+      "error",
+      "PascalCase",
+      {
+        "ignores": [
+          "nuxt",
+          "nuxt-link"
+        ]
+      }
+    ],
+    "no-console": [
+      "error",
+      {
+        "allow": [
+          "log",
+          "error",
+          "warn"
+        ]
+      }
+    ]
+  },
+  globals: {
+    "$nuxt": true
+  },
   // required to lint *.vue files
   plugins: [
     'vue',
