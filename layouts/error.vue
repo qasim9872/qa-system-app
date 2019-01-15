@@ -3,6 +3,9 @@
     <h1 v-if="error.statusCode === 404">
       Page not found
     </h1>
+    <h1 v-else-if="error.message">
+      {{ error.message }}
+    </h1>
     <h1 v-else>
       An error occurred
     </h1>

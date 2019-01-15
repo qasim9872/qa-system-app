@@ -51,10 +51,11 @@ export default {
         question: this.question
       })
       if (response.status == 200) {
-        this.$store.commit('question/add', {
+        this.$store.commit('qsHandler/add', {
           question: this.question,
           ...response.data
         })
+        this.$router.push(`/result/${response.data._id}`)
       } else {
         alert('Submission failed')
       }
