@@ -1,10 +1,6 @@
-import createPersistedState from 'vuex-persistedstate'
-
 export const state = () => ({
   questions: []
 })
-
-export const plugins = [{ src: createPersistedState, ssr: false }]
 
 export const mutations = {
   add(state, data) {

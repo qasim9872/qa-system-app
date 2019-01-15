@@ -1,22 +1,20 @@
+import { getSessionItem, setSessionItem } from '../utils/session'
+
 export const state = () => ({
   user: null
 })
 
 export const mutations = {
   setUser(state, user) {
-    localStorage.setItem('user', JSON.stringify(user))
+    setSessionItem('user', user)
     state.user = user
   }
 }
 
 export const actions = {
   loadUser({ commit }) {
-    try {
-      const user = JSON.parse(localStorage.getItem('user'))
-      commit('setUser', user)
-    } catch (ex) {
-      localStorage.setItem('user', null)
-    }
+    const user = getSessionItem('user')
+    commit('setUser', user)
   }
 }
 

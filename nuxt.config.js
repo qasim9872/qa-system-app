@@ -47,11 +47,7 @@ module.exports = {
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: [
-    '@/plugins/vuetify',
-    '@/plugins/axios',
-    { src: '~/plugins/localStorage.js', ssr: false }
-  ],
+  plugins: ['@/plugins/vuetify', '@/plugins/axios'],
 
   /*
   ** Nuxt.js modules
