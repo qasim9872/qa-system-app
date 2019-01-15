@@ -42,19 +42,22 @@
 export default {
   data() {
     return {
-      question: '',
-      answer: ''
+      question: ''
     }
   },
   methods: {
-    askAway() {
-      this.$axios
-        .post('/api/v1/question', {
-          question: this.question
+    async askAway() {
+      const response = await this.$axios.post('/api/v1/question', {
+        question: this.question
+      })
+      if (response.status == 200) {
+        this.$store.commit('question/add', {
+          question: this.question,
+          ...response.data
         })
-        .then(res => {
-          this.answer = res.answer
-        })
+      } else {
+        alert('Submission failed')
+      }
     }
   }
 }

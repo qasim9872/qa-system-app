@@ -12,7 +12,7 @@
             class="nav-link">Home</nuxt-link>
         </li>
 
-        <template v-if="$store.getters.user">
+        <template v-if="$store.getters['auth/user']">
           <li class="nav-item">
             <nuxt-link 
               to="/editor" 
@@ -25,12 +25,12 @@
           </li>
           <li class="nav-item">
             <nuxt-link 
-              :to="'/profile/' + $store.getters.user.username" 
+              :to="'/profile/' + $store.getters['auth/user'].username" 
               class="nav-link">
               <img 
-                :src="$store.getters.user.image || 'https://static.productionready.io/images/smiley-cyrus.jpg'" 
+                :src="$store.getters['auth/user'].image || 'https://static.productionready.io/images/smiley-cyrus.jpg'" 
                 class="user-pic">
-              {{ $store.getters.user.username }}
+              {{ $store.getters['auth/user'].username }}
             </nuxt-link>
           </li>
         </template>

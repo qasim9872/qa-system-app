@@ -64,7 +64,7 @@ export default {
           }
         })
         .then(res => {
-          this.$store.commit('setUser', res.data.user)
+          this.$store.commit('auth/setUser', res.data.user)
           this.$router.push('/')
         })
     }
