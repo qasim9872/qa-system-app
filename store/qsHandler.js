@@ -1,11 +1,17 @@
+import * as _ from 'lodash'
+
 export const state = () => ({
   questions: []
 })
 
 export const mutations = {
   add(state, data) {
-    console.log(`qs added`)
-    state.questions.push(data)
+    if (Array.isArray(data)) {
+      // remove duplicates & merge
+      state.questions = _.unionBy(state.questions, data, '_id')
+    } else {
+      state.questions.push(data)
+    }
   },
 
   remove(state, { question }) {
@@ -16,7 +22,13 @@ export const mutations = {
 export const actions = {
   getQuestionData({ state }, id) {
     const found = state.questions.find(value => value._id == id)
-    console.log(`get question ${JSON.stringify(found, null, 2)}`)
     return found
+  },
+  async fetchQuestionData({ commit }, id) {
+    const fetched = await this.$axios.$post('api/v1/questions', {
+      id
+    })
+    commit('add', fetched)
+    return fetched
   }
 }

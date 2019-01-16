@@ -15,13 +15,13 @@
                 to="/" 
                 class="nav-link">Home</nuxt-link>
             </li>
+            <li class="nav-item">
+              <nuxt-link 
+                to="/results" 
+                class="nav-link"><i class="ion-search"/>&nbsp;History</nuxt-link>
+            </li>
 
             <template v-if="$store.getters['auth/user']">
-              <li class="nav-item">
-                <nuxt-link 
-                  to="/editor" 
-                  class="nav-link"><i class="ion-compose"/>&nbsp;New Post</nuxt-link>
-              </li>
               <li class="nav-item">
                 <nuxt-link 
                   to="/settings" 

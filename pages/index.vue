@@ -55,7 +55,7 @@ export default {
           question: this.question,
           ...response.data
         })
-        this.$router.push(`/result/${response.data._id}`)
+        this.$router.push(`/results/${response.data._id}`)
       } else {
         alert('Submission failed')
       }

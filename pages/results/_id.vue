@@ -9,6 +9,7 @@
       wrap>
       <div v-if="showResult">
         <result 
+          :expand="true"
           :data="question"/>
       </div>
       <div v-else>
@@ -29,12 +30,11 @@ export default {
   },
   async asyncData({ store, route, error }) {
     const qsId = route.params.id
-    const question = await store.dispatch('qsHandler/getQuestionData', qsId)
-
-    console.log(`question in _id.vue: ${question}`)
+    let question = await store.dispatch('qsHandler/getQuestionData', qsId)
 
     if (!question) {
       // call api
+      question = await store.dispatch('qsHandler/fetchQuestionData', qsId)
     }
 
     if (!question) {
