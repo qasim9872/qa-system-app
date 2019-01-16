@@ -7,6 +7,9 @@
     <v-layout 
       column 
       wrap>
+      
+      <h1 class="text-xs-center">All questions</h1>
+
       <div v-if="showResults">
 
         <div 
@@ -19,8 +22,9 @@
         </div>
 
       </div>
+
       <div v-else>
-        No question with id {{ qsId }}
+        No questions available
       </div>
       
     </v-layout>
@@ -37,10 +41,6 @@ export default {
   },
   async asyncData({ store }) {
     const questions = await store.dispatch('qsHandler/fetchQuestionData')
-
-    if (!questions) {
-      // call api
-    }
 
     return {
       questions
