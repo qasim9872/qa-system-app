@@ -56,7 +56,7 @@ export default {
   methods: {
     handleSignup() {
       this.$axios
-        .post('/api/v1/register', {
+        .post('/auth/register', {
           user: {
             username: this.username,
             email: this.email,

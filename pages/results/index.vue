@@ -3,8 +3,10 @@
     grid-list-md 
     text-md-center 
     fluid 
-    fill-height>
+    fill-height 
+    justify-center>
     <v-layout 
+      class="container"
       column 
       wrap>
       
@@ -13,7 +15,7 @@
       <div v-if="showResults">
 
         <div 
-          v-for="(question, index) in questions"
+          v-for="(question, index) in questionsList"
           :key="question._id">
           <result 
             :route="true"
@@ -25,6 +27,14 @@
 
       <div v-else>
         No questions available
+      </div>
+      <div>
+        <v-btn 
+          v-if="canShowMore"
+          class="px-3 white--text"
+          color="#5cb85c"
+          @click="showMore"
+        > Show more </v-btn>
       </div>
       
     </v-layout>
@@ -39,6 +49,12 @@ export default {
   components: {
     Result
   },
+  data() {
+    return {
+      show: 5,
+      increment: 10
+    }
+  },
   async asyncData({ store }) {
     const questions = await store.dispatch('qsHandler/fetchQuestionData')
 
@@ -47,9 +63,25 @@ export default {
     }
   },
   computed: {
+    canShowMore() {
+      return this.$store.getters['qsHandler/length'] > this.show
+    },
+    questionsList() {
+      return this.questions.slice(0, this.show)
+    },
     showResults() {
       return this.questions.length > 0
+    }
+  },
+  methods: {
+    showMore() {
+      this.show += this.increment
     }
   }
 }
 </script>
+<style>
+.container {
+  max-width: 1500px !important;
+}
+</style>

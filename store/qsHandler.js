@@ -25,10 +25,24 @@ export const actions = {
     return found
   },
   async fetchQuestionData({ commit }, id) {
-    const fetched = await this.$axios.$post('api/v1/questions', {
+    const fetched = await this.$axios.$post('question/retrieve', {
       id
     })
     commit('add', fetched)
     return fetched
+  },
+  async fetchAnswer({ commit }, question) {
+    const fetched = await this.$axios.$post('question/answer', {
+      question
+    })
+    console.log(fetched)
+    commit('add', fetched)
+    return fetched
+  }
+}
+
+export const getters = {
+  length(state) {
+    return state.questions.length
   }
 }

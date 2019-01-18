@@ -1,5 +1,7 @@
 <template>
-  <v-flex xs12>
+  <v-flex 
+    xs12 
+    class="container">
     <v-card 
       dark
       color="blue" 

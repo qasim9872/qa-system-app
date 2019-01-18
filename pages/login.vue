@@ -50,7 +50,7 @@ export default {
   methods: {
     handleLogin() {
       this.$axios
-        .post('api/v1/login', {
+        .post('/auth/login', {
           email: this.email,
           password: this.password
         })

@@ -47,18 +47,16 @@ export default {
   },
   methods: {
     async askAway() {
-      const response = await this.$axios.post('/api/v1/question', {
-        question: this.question
-      })
-      if (response.status == 200) {
-        this.$store.commit('qsHandler/add', {
-          question: this.question,
-          ...response.data
-        })
-        this.$router.push(`/results/${response.data._id}`)
-      } else {
-        alert('Submission failed')
-      }
+      const answer = await this.$store.dispatch(
+        'qsHandler/fetchAnswer',
+        this.question
+      )
+
+      // this.$store.commit('qsHandler/add', {
+      //   question: this.question,
+      //   ...response.data
+      // })
+      this.$router.push(`/results/${answer._id}`)
     }
   }
 }
