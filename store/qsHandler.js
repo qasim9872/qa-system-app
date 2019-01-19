@@ -24,9 +24,10 @@ export const actions = {
     const found = state.questions.find(value => value._id == id)
     return found
   },
-  async fetchQuestionData({ commit }, id) {
+  async fetchQuestionData({ commit, state }, id) {
     const fetched = await this.$axios.$post('api/v1/question/retrieve', {
-      id
+      id,
+      offset: state.questions.length
     })
     commit('add', fetched)
     return fetched
@@ -43,5 +44,8 @@ export const actions = {
 export const getters = {
   length(state) {
     return state.questions.length
+  },
+  questions(state) {
+    return state.questions
   }
 }

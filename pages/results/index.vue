@@ -56,10 +56,8 @@ export default {
     }
   },
   async asyncData({ store }) {
-    const questions = await store.dispatch('qsHandler/fetchQuestionData')
-
-    return {
-      questions
+    if (store.getters['qsHandler/length'] === 0) {
+      await store.dispatch('qsHandler/fetchQuestionData')
     }
   },
   computed: {
@@ -67,14 +65,15 @@ export default {
       return this.$store.getters['qsHandler/length'] > this.show
     },
     questionsList() {
-      return this.questions.slice(0, this.show)
+      return this.$store.getters['qsHandler/questions'].slice(0, this.show)
     },
     showResults() {
-      return this.questions.length > 0
+      return this.$store.getters['qsHandler/length'] > 0
     }
   },
   methods: {
-    showMore() {
+    async showMore() {
+      await this.$store.dispatch('qsHandler/fetchQuestionData')
       this.show += this.increment
     }
   }
