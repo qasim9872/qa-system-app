@@ -1,8 +1,4 @@
-const config = require('../config/dev')
-
 export default function({ $axios, redirect, store }) {
-  $axios.defaults.baseURL = config.api_url
-
   $axios.onRequest(config => {
     const token = store.getters['auth/token']
     if (token) {

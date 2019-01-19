@@ -24,16 +24,16 @@ export const actions = {
     }
   },
   async registerUser(context, params) {
-    await this.$axios.post('/auth/register', { ...params })
+    await this.$axios.post('api/v1/auth/register', { ...params })
   },
   async loginUser({ commit, dispatch }, params) {
-    const res = await this.$axios.post('/auth/login', { ...params })
+    const res = await this.$axios.post('api/v1/auth/login', { ...params })
     const token = res.data.token
     commit('setToken', token)
     await dispatch('getUser')
   },
   async getUser({ commit }) {
-    const res = await this.$axios.post('/auth/user')
+    const res = await this.$axios.post('api/v1/auth/user')
     const user = res.data
     commit('setUser', user)
   }

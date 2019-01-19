@@ -46,6 +46,7 @@
 import { validateEmail } from '../utils/helper'
 
 export default {
+  middleware: 'checkAuthDone',
   data() {
     return {
       valid: false,

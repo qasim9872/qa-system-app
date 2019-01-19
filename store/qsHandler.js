@@ -25,17 +25,16 @@ export const actions = {
     return found
   },
   async fetchQuestionData({ commit }, id) {
-    const fetched = await this.$axios.$post('question/retrieve', {
+    const fetched = await this.$axios.$post('api/v1/question/retrieve', {
       id
     })
     commit('add', fetched)
     return fetched
   },
   async fetchAnswer({ commit }, question) {
-    const fetched = await this.$axios.$post('question/answer', {
+    const fetched = await this.$axios.$post('api/v1/question/answer', {
       question
     })
-    console.log(fetched)
     commit('add', fetched)
     return fetched
   }

@@ -1,4 +1,5 @@
 const pkg = require('./package')
+const api_url = require('./config/dev').api_url
 
 module.exports = {
   mode: 'universal',
@@ -62,6 +63,11 @@ module.exports = {
   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
+    proxy: true,
+    credentials: true
+  },
+  proxy: {
+    '/api/v1/': api_url
   },
   // Toast
   toast: {
