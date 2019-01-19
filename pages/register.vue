@@ -83,9 +83,7 @@ export default {
           password: this.password
         })
 
-        this.$toast
-          .success('registration successfull, please log in')
-          .goAway(5000)
+        this.$toast.success('registration successfull, please log in')
 
         this.$router.push('/login')
       } catch (err) {

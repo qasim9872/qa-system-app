@@ -56,9 +56,7 @@ export default {
     }
   },
   async asyncData({ store }) {
-    if (store.getters['qsHandler/length'] === 0) {
-      await store.dispatch('qsHandler/fetchQuestionData')
-    }
+    await store.dispatch('qsHandler/fetchQuestionData')
   },
   computed: {
     canShowMore() {
@@ -73,7 +71,13 @@ export default {
   },
   methods: {
     async showMore() {
-      await this.$store.dispatch('qsHandler/fetchQuestionData')
+      const totalLoadedQuestions = this.$store.getters['qsHandler/length']
+
+      if (this.show + this.increment - totalLoadedQuestions >= 0) {
+        // only fetch more if required
+        await this.$store.dispatch('qsHandler/fetchQuestionData')
+      }
+
       this.show += this.increment
     }
   }

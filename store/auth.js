@@ -32,6 +32,10 @@ export const actions = {
     commit('setToken', token)
     await dispatch('getUser')
   },
+  async logoutUser({ commit }) {
+    commit('setToken', null)
+    commit('setUser', null)
+  },
   async getUser({ commit }) {
     const res = await this.$axios.post('api/v1/auth/user')
     const user = res.data

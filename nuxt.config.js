@@ -73,6 +73,7 @@ module.exports = {
   toast: {
     icon: 'fiber_manual_record',
     position: 'bottom-left',
+    duration: 5000,
     action: {
       icon: 'clear',
       onClick: (event, toast) => {

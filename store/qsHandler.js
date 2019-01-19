@@ -1,7 +1,8 @@
 import * as _ from 'lodash'
 
 export const state = () => ({
-  questions: []
+  questions: [],
+  fetch: 50
 })
 
 export const mutations = {
@@ -27,16 +28,19 @@ export const actions = {
   async fetchQuestionData({ commit, state }, id) {
     const fetched = await this.$axios.$post('api/v1/question/retrieve', {
       id,
-      offset: state.questions.length
+      offset: state.questions.length,
+      fetch: state.fetch
     })
     commit('add', fetched)
     return fetched
   },
-  async fetchAnswer({ commit }, question) {
+  async fetchAnswer({ commit, dispatch }, question) {
     const fetched = await this.$axios.$post('api/v1/question/answer', {
       question
     })
     commit('add', fetched)
+    // get the updated user
+    await dispatch('auth/getUser')
     return fetched
   }
 }
@@ -47,5 +51,8 @@ export const getters = {
   },
   questions(state) {
     return state.questions
+  },
+  fetchLimit(state) {
+    return state.fetch
   }
 }

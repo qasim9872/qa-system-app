@@ -74,7 +74,7 @@ export default {
           password: this.password
         })
 
-        this.$toast.success('logged in successfully').goAway(5000)
+        this.$toast.success('logged in successfully')
 
         this.$router.push('/')
       } catch (err) {

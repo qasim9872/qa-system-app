@@ -17,9 +17,8 @@ export default function({ $axios, redirect, store }) {
         toastMessage = 'bad request params'
         break
       case 401:
-        toastMessage = 'Authorisation failed'
-        store.commit('auth/setUser', null)
-        store.commit('auth/setToken', null)
+        toastMessage = 'authorisation failed'
+        store.dispatch('auth/logoutUser')
         redirect('/login')
         break
       default:
@@ -27,7 +26,7 @@ export default function({ $axios, redirect, store }) {
         break
     }
 
-    store.$toast.error(toastMessage).goAway(5000)
+    store.$toast.error(toastMessage)
     return Promise.reject(error)
   })
 }
