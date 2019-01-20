@@ -22,6 +22,13 @@
             />
 
             <v-text-field
+              v-model="username"
+              :rules="usernameRules"
+              label="Username"
+              required
+            />
+
+            <v-text-field
               v-model="email"
               :rules="emailRules"
               label="E-mail"
@@ -50,7 +57,7 @@
 </template>
 
 <script>
-import { validateEmail } from '../utils/helper'
+import { validateEmail, validateUsername } from '../utils/helper'
 
 export default {
   middleware: 'checkAuthDone',
@@ -62,6 +69,18 @@ export default {
         v => !!v || 'Name is required',
         v => (v && v.length <= 25) || 'Name must be less than 25 characters'
       ],
+      username: '',
+      usernameRules: [
+        v => !!v || 'Username is required',
+        v => (v && v.length >= 8) || 'Username must be at least 8 characters',
+        v =>
+          validateUsername(v) ||
+          [
+            'The username should start and end with a letter or number, and',
+            'only contain letters, numbers, hyphen, dot or underscore'
+          ].join(' ')
+      ],
+
       email: '',
       emailRules: [
         v => !!v || 'E-mail is required',
@@ -79,6 +98,7 @@ export default {
       try {
         await this.$store.dispatch('auth/registerUser', {
           name: this.name,
+          username: this.username,
           email: this.email,
           password: this.password
         })

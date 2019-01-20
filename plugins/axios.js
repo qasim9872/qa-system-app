@@ -21,6 +21,12 @@ export default function({ $axios, redirect, store }) {
         store.dispatch('auth/logoutUser')
         redirect('/login')
         break
+      case 409:
+        toastMessage =
+          error.response && error.response.data && error.response.data.message
+            ? error.response.data.message
+            : 'already taken'
+        break
       default:
         toastMessage = 'request failed'
         break

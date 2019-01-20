@@ -49,5 +49,9 @@ export const getters = {
   },
   token(state) {
     return state.token
+  },
+  loggedIn(state) {
+    console.log(`log in`)
+    return Boolean(state.user && state.token)
   }
 }

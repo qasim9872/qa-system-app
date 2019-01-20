@@ -21,7 +21,7 @@
                 class="nav-link"><i class="ion-search"/>&nbsp;History</nuxt-link>
             </li>
 
-            <template v-if="$store.getters['auth/user']">
+            <template v-if="$store.getters['auth/loggedIn']">
               <li class="nav-item">
                 <nuxt-link 
                   to="/settings" 
@@ -29,7 +29,7 @@
               </li>
               <li class="nav-item">
                 <nuxt-link 
-                  :to="'/profile/' + $store.getters['auth/user'].username" 
+                  :to="'/user'" 
                   class="nav-link">
                   <img 
                     :src="$store.getters['auth/user'].image || 'https://static.productionready.io/images/smiley-cyrus.jpg'" 
