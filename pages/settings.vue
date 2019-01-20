@@ -51,8 +51,6 @@
               @click="handleUpdateSettings">Update</v-btn>
           </v-form>
 
-          <v-hr/>
-
           <v-btn 
             flat
             class="btn btn-outline-danger" 
