@@ -46,7 +46,7 @@
 import { validateEmail } from '../utils/helper'
 
 export default {
-  middleware: 'checkAuthDone',
+  middleware: 'guest',
   data() {
     return {
       valid: false,
@@ -73,10 +73,6 @@ export default {
           email: this.email,
           password: this.password
         })
-
-        this.$toast.success('logged in successfully')
-
-        this.$router.push('/')
       } catch (err) {
         console.error('Error registering user: ', err)
       }

@@ -1,13 +1,4 @@
 export default function({ $axios, redirect, store }) {
-  $axios.onRequest(config => {
-    const token = store.getters['auth/token']
-    if (token) {
-      config.headers['Authorization'] = `Bearer ${token}`
-    } else {
-      delete config.headers['Authorization']
-    }
-  })
-
   $axios.onError(error => {
     const code = parseInt(error.response && error.response.status)
     let toastMessage = ''

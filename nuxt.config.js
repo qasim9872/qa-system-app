@@ -56,7 +56,8 @@ module.exports = {
   modules: [
     // Doc: https://github.com/nuxt-community/axios-module#usage
     '@nuxtjs/axios',
-    '@nuxtjs/toast'
+    '@nuxtjs/toast',
+    '@nuxtjs/auth'
   ],
   /*
   ** Axios module configuration
@@ -66,8 +67,33 @@ module.exports = {
     proxy: true,
     credentials: true
   },
+  /*
+  ** Proxy module configuration
+  */
   proxy: {
     '/api/v1/': api_url
+  },
+  /*
+  ** Auth module configuration
+  */
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: {
+            url: 'api/v1/auth/login',
+            method: 'post',
+            propertyName: 'token'
+          },
+          user: {
+            url: 'api/v1/auth/user',
+            method: 'post',
+            propertyName: ''
+          },
+          logout: false
+        }
+      }
+    }
   },
   // Toast
   toast: {

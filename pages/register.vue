@@ -60,7 +60,7 @@
 import { validateEmail, validateUsername } from '../utils/helper'
 
 export default {
-  middleware: 'checkAuthDone',
+  middleware: 'guest',
   data() {
     return {
       valid: false,
@@ -103,9 +103,12 @@ export default {
           password: this.password
         })
 
-        this.$toast.success('registration successfull, please log in')
-
-        this.$router.push('/login')
+        await this.$store.dispatch('auth/loginUser', {
+          name: this.name,
+          username: this.username,
+          email: this.email,
+          password: this.password
+        })
       } catch (err) {
         console.error('Error registering user: ', err)
       }

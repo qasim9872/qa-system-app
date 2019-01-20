@@ -34,13 +34,14 @@ export const actions = {
     commit('add', fetched)
     return fetched
   },
-  async fetchAnswer({ commit, dispatch }, question) {
+  async fetchAnswer({ commit }, question) {
     const fetched = await this.$axios.$post('api/v1/question/answer', {
       question
     })
     commit('add', fetched)
     // get the updated user
-    await dispatch('auth/getUser')
+    await this.$auth.fetchUser
+
     return fetched
   }
 }

@@ -21,7 +21,7 @@
                 class="nav-link"><i class="ion-search"/>&nbsp;History</nuxt-link>
             </li>
 
-            <template v-if="$store.getters['auth/loggedIn']">
+            <template v-if="isAuthenticated">
               <li class="nav-item">
                 <nuxt-link 
                   to="/settings" 
@@ -32,9 +32,9 @@
                   :to="'/user'" 
                   class="nav-link">
                   <img 
-                    :src="$store.getters['auth/user'].image || 'https://static.productionready.io/images/smiley-cyrus.jpg'" 
+                    :src="user.image || 'https://static.productionready.io/images/smiley-cyrus.jpg'" 
                     class="user-pic">
-                  {{ $store.getters['auth/user'].username }}
+                  {{ user.username }}
                 </nuxt-link>
               </li>
             </template>
@@ -59,3 +59,16 @@
   </v-flex >
 
 </template>
+
+<script>
+import { mapGetters } from 'vuex'
+
+export default {
+  computed: {
+    ...mapGetters({
+      user: 'auth/loggedInUser',
+      isAuthenticated: 'auth/isAuthenticated'
+    })
+  }
+}
+</script>

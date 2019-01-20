@@ -64,7 +64,7 @@
 
 <script>
 export default {
-  middleware: 'authRequired',
+  middleware: 'auth',
   data() {
     return {
       valid: false,
@@ -88,7 +88,7 @@ export default {
   },
   methods: {
     getSettings() {
-      const user = this.$store.getters['auth/user']
+      const user = this.$store.getters['auth/loggedInUser']
       this.image = user.image
       this.username = user.username
       this.bio = user.bio
@@ -112,10 +112,8 @@ export default {
         this.$router.push(`/profile/${res.data.user.username}`)
       })
     },
-    handleLogout() {
-      this.$store.dispatch('auth/logoutUser')
-      this.$router.push('/')
-      this.$toast.success('logged out successfully')
+    async handleLogout() {
+      await this.$store.dispatch('auth/logoutUser')
     }
   }
 }

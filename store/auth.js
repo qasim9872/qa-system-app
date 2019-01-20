@@ -1,57 +1,30 @@
-import { getSessionItem, setSessionItem } from '../utils/session'
-
-export const state = () => ({
-  user: null,
-  token: null
-})
-
-export const mutations = {
-  setUser(state, user) {
-    state.user = user
-  },
-  setToken(state, token) {
-    setSessionItem('token', token)
-    state.token = token
-  }
-}
-
 export const actions = {
-  async loadUser({ commit, dispatch }) {
-    const token = getSessionItem('token')
-    if (token) {
-      commit('setToken', token)
-      await dispatch('getUser')
-    }
-  },
   async registerUser(context, params) {
     await this.$axios.post('api/v1/auth/register', { ...params })
+
+    this.$toast.success('registration successfull')
   },
-  async loginUser({ commit, dispatch }, params) {
-    const res = await this.$axios.post('api/v1/auth/login', { ...params })
-    const token = res.data.token
-    commit('setToken', token)
-    await dispatch('getUser')
+  async loginUser(/*{ commit, dispatch }*/ context, params) {
+    await this.$auth.loginWith('local', {
+      data: params
+    })
+    this.$toast.success('logged in successfully')
   },
-  async logoutUser({ commit }) {
-    commit('setToken', null)
-    commit('setUser', null)
+  async refetchUser() {
+    await this.$auth.fetchUser
   },
-  async getUser({ commit }) {
-    const res = await this.$axios.post('api/v1/auth/user')
-    const user = res.data
-    commit('setUser', user)
+  async logoutUser() {
+    await this.$auth.logout()
+    this.$toast.success('logged out successfully')
   }
 }
 
 export const getters = {
-  user(state) {
+  isAuthenticated(state) {
+    return state.loggedIn
+  },
+
+  loggedInUser(state) {
     return state.user
-  },
-  token(state) {
-    return state.token
-  },
-  loggedIn(state) {
-    console.log(`log in`)
-    return Boolean(state.user && state.token)
   }
 }
