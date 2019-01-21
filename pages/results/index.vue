@@ -12,42 +12,24 @@
       
       <h1 class="text-xs-center">All questions</h1>
 
-      <div v-if="showResults">
+      <result-list
+        :questions-list="questionsList"
+        :show-results="showResults"
+        :can-show-more="canShowMore"
+        @showMore="showMore"
+      />
 
-        <div 
-          v-for="(question, index) in questionsList"
-          :key="question._id">
-          <result 
-            :route="true"
-            :prefix="index+1" 
-            :data="question" />
-        </div>
-
-      </div>
-
-      <div v-else>
-        No questions available
-      </div>
-      <div>
-        <v-btn 
-          v-if="canShowMore"
-          class="px-3 white--text"
-          color="#5cb85c"
-          @click="showMore"
-        > Show more </v-btn>
-      </div>
-      
     </v-layout>
 
   </v-container>
 </template>
 
 <script>
-import Result from '../../components/Result'
+import ResultList from '../../components/ResultList'
 
 export default {
   components: {
-    Result
+    ResultList
   },
   data() {
     return {

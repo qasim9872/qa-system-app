@@ -9,7 +9,7 @@ export default function({ $axios, redirect, store }) {
         break
       case 401:
         toastMessage = 'authorisation failed'
-        store.dispatch('auth/logoutUser')
+        store.dispatch('auth/removeUser')
         redirect('/login')
         break
       case 409:

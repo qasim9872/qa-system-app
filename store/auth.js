@@ -13,6 +13,9 @@ export const actions = {
   async refetchUser() {
     await this.$auth.fetchUser
   },
+  async removeUser() {
+    await this.$auth.logout()
+  },
   async logoutUser() {
     await this.$auth.logout()
     this.$toast.success('logged out successfully')

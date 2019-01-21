@@ -7,12 +7,22 @@ export const state = () => ({
 
 export const mutations = {
   add(state, data) {
-    if (Array.isArray(data)) {
-      // remove duplicates & merge
-      state.questions = _.unionBy(state.questions, data, '_id')
-    } else {
-      state.questions.push(data)
+    if (!Array.isArray(data)) {
+      data = [data]
     }
+    // remove duplicates & merge
+    const merged = _.unionBy(state.questions, data, '_id')
+    const updated = _.orderBy(merged, ['createdAt'], ['desc'])
+    state.questions = updated
+  },
+  update(state, updatedQuestion) {
+    const id = state.questions.findIndex(
+      question => question._id == updatedQuestion._id
+    )
+
+    // update the liked and disliked props
+    state.questions[id].likedBy = updatedQuestion.likedBy
+    state.questions[id].dislikedBy = updatedQuestion.dislikedBy
   },
 
   remove(state, { question }) {
@@ -43,6 +53,28 @@ export const actions = {
     await this.$auth.fetchUser
 
     return fetched
+  },
+  async likeQuestion({ commit }, questionId) {
+    const canLike = this.$auth.loggedIn
+    if (canLike) {
+      const liked = await this.$axios.$post('api/v1/question/like', {
+        question: questionId
+      })
+      commit('update', liked)
+    } else {
+      this.$toast.error('Please sign in to like questions')
+    }
+  },
+  async dislikeQuestion({ commit }, questionId) {
+    const canDislike = this.$auth.loggedIn
+    if (canDislike) {
+      const disliked = await this.$axios.$post('api/v1/question/dislike', {
+        question: questionId
+      })
+      commit('update', disliked)
+    } else {
+      this.$toast.error('Please sign in to dislike questions')
+    }
   }
 }
 

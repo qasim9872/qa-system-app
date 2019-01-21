@@ -7,6 +7,7 @@
       color="blue" 
       class="white--text">
       <v-card-title 
+        v-if="!hideTitle"
         primary-title 
         class="expandable"
         @click="toggleExpansion">
@@ -19,7 +20,7 @@
       <div v-if="expansion">
         <v-textarea 
           :value="query"
-          class="font-weight-bold px-3 white--text"
+          class="font-weight-bold pa-3 white--text"
           label="Sparql query"
           background-color="primary"
           flat
@@ -45,8 +46,8 @@
         <div v-else>
           Unable to find an answer
         </div>
-      
-        <v-card-actions>
+
+        <v-card-actions class="px-3">
           <v-btn 
             v-if="route"
             class="px-3"
@@ -55,15 +56,29 @@
               :to="routeLink" 
               class="nav-link">View Full</nuxt-link>
           </v-btn>
+          <v-btn @click="like(data._id)">  <v-icon left>thumb_up</v-icon>{{ likes }}</v-btn>
+          <v-btn @click="dislike(data._id)"> <v-icon left>thumb_down</v-icon>{{ dislikes }} </v-btn>
         </v-card-actions>
+          
       </div>
     </v-card>
   </v-flex>
 </template>
 
 <script>
+import stats from './QuestionStats'
+import { mapActions } from 'vuex'
+
 export default {
+  components: {
+    stats
+  },
   props: {
+    hideTitle: {
+      required: false,
+      type: Boolean,
+      default: false
+    },
     prefix: {
       required: false,
       type: Number,
@@ -107,6 +122,12 @@ export default {
     },
     results() {
       return this.data.results
+    },
+    likes() {
+      return this.data.likedBy.length || 0
+    },
+    dislikes() {
+      return this.data.dislikedBy.length || 0
     }
   },
   methods: {
@@ -117,7 +138,11 @@ export default {
     },
     toggleExpansion() {
       this.expansion = !this.expansion
-    }
+    },
+    ...mapActions({
+      like: 'qsHandler/likeQuestion',
+      dislike: 'qsHandler/dislikeQuestion'
+    })
   }
 }
 </script>
