@@ -17,7 +17,7 @@ export const actions = {
     this.$toast.success('logged in successfully')
   },
   async refetchUser() {
-    await this.$auth.fetchUser
+    await this.$auth.fetchUser()
   },
   async removeUser() {
     await this.$auth.logout()

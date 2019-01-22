@@ -26,6 +26,8 @@ export default {
       }
     }
 
+    console.log('here')
+
     // fetch user details
   }
 }

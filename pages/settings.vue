@@ -100,8 +100,8 @@ export default {
     async handleUpdateSettings() {
       this.updating = true
       const data = {
-        image: this.image,
-        bio: this.bio,
+        image: this.image || '',
+        bio: this.bio || '',
         password: this.password
       }
 

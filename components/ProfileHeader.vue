@@ -1,33 +1,59 @@
 <template>
-  <v-flex xs12>
 
-    <v-card 
-      color="cyan darken-2" 
-      class="white--text user-info">
-      <v-layout>
-
-        <v-flex xs5>
-          <v-img
+  <v-card 
+    color="cyan darken-2" 
+    class="user-info">
+    <v-layout
+      row
+      
+      justify-center
+    >
+      <v-card-title 
+        primary-title 
+        align-center>
+        <v-avatar
+          size="200px"
+        >
+          <img
             :src="image"
-            class="user-img"
-            height="200px"
-          />
-        </v-flex>
+            alt="Avatar"
+          >
 
-        <v-flex xs7>
-          <v-card-title primary-title>
-            <div>
-              <div>Supermodel</div>
-              <div>Foster the People</div>
-              <div>(2014)</div>
-            </div>
-          </v-card-title>
-        </v-flex>
+        </v-avatar>
+      </v-card-title>
+      <v-layout 
+        wrap 
+        justify-center>
+        <v-card-text align-center>
+          <div class="headline font-weight-bold">
+            {{ name }}
+          </div>
+          <div class="headline font-weight-bold">
+            {{ bio }}
+          </div>
+        </v-card-text>
 
-      </v-layout>   
-    </v-card>
+        <v-card-actions v-if="personal">
+          <v-layout
+            align-center
+            justify-end
+            class="ma-0"
+          >
+            <v-btn 
+              class="px-3"
+              dark
+              @click="$router.push('/settings')">
+              <i class="ion-gear-a"/>&nbsp;
+              Edit profile settings
+            </v-btn>
+          </v-layout>
+        </v-card-actions>
+      </v-layout>
+    
 
-  </v-flex>
+    </v-layout>   
+  </v-card>
+
 </template>
 
 <script>
@@ -35,6 +61,10 @@ export default {
   props: {
     user: {
       type: Object,
+      required: true
+    },
+    personal: {
+      type: Boolean,
       required: true
     }
   },

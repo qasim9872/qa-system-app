@@ -11,6 +11,7 @@
       wrap>
       <ProfileHeader
         :user="userData"
+        :personal="personal"
       />
     </v-layout>
   </v-container>
