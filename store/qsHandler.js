@@ -44,15 +44,15 @@ export const actions = {
     commit('add', fetched)
     return fetched
   },
-  async fetchAnswer({ commit }, question) {
-    const fetched = await this.$axios.$post('api/v1/question/answer', {
+  async fetchAnswer(context, question) {
+    const answer = await this.$axios.$post('api/v1/question/answer', {
       question
     })
-    commit('add', fetched)
-    // get the updated user
-    await this.$auth.fetchUser
 
-    return fetched
+    // get the updated user
+    await this.$auth.fetchUser()
+
+    return answer.id
   },
   async likeQuestion({ commit }, questionId) {
     const canLike = this.$auth.loggedIn

@@ -47,16 +47,12 @@ export default {
   },
   methods: {
     async askAway() {
-      const answer = await this.$store.dispatch(
+      const answerId = await this.$store.dispatch(
         'qsHandler/fetchAnswer',
         this.question
       )
 
-      // this.$store.commit('qsHandler/add', {
-      //   question: this.question,
-      //   ...response.data
-      // })
-      this.$router.push(`/results/${answer._id}`)
+      this.$router.push(`/results/${answerId}`)
     }
   }
 }
