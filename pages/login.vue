@@ -74,7 +74,7 @@ export default {
           password: this.password
         })
       } catch (err) {
-        console.error('Error registering user: ', err)
+        console.error('Error login in user: ', err)
       }
     },
     clear() {

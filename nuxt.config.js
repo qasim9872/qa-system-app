@@ -86,8 +86,8 @@ module.exports = {
             propertyName: 'token'
           },
           user: {
-            url: 'api/v1/auth/user',
-            method: 'post',
+            url: 'api/v1/user',
+            method: 'get',
             propertyName: ''
           },
           logout: false

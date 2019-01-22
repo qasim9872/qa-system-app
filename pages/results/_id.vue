@@ -34,7 +34,11 @@ export default {
 
     if (!question) {
       // call api
-      question = await store.dispatch('qsHandler/fetchQuestionData', qsId)
+      const fetched = await store.dispatch('qsHandler/fetchQuestionData', qsId)
+      // fetched will be an array
+      if (fetched && fetched.length > 0) {
+        question = fetched[0]
+      }
     }
 
     if (!question) {

@@ -1,8 +1,14 @@
 export const actions = {
-  async registerUser(context, params) {
-    await this.$axios.post('api/v1/auth/register', { ...params })
+  async updateUser({ dispatch }, params) {
+    await this.$axios.put('api/v1/user', { ...params })
+    await dispatch('refetchUser')
 
-    this.$toast.success('registration successfull')
+    this.$toast.success('updated successfully')
+  },
+  async registerUser(context, params) {
+    await this.$axios.post('api/v1/user', { ...params })
+
+    this.$toast.success('registration successful')
   },
   async loginUser(/*{ commit, dispatch }*/ context, params) {
     await this.$auth.loginWith('local', {

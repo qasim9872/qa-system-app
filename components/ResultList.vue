@@ -15,8 +15,7 @@
             class="header">{{ index+1 }}. {{ question.question }}</div>
           <result 
             :data="question"
-            hide-title
-            expand 
+            hide-title 
             route />
         </v-expansion-panel-content>
       </v-expansion-panel>

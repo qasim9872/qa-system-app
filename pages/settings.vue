@@ -45,6 +45,7 @@
             />
 
             <v-btn 
+              :loading="updating"
               :class="{ red: !valid, green: valid }"
               :disabled="!valid"
               class="pull-xs-right" 
@@ -52,8 +53,8 @@
           </v-form>
 
           <v-btn 
-            flat
-            class="btn btn-outline-danger" 
+            flat 
+            class="btn btn-outline-danger"
             @click="handleLogout">Or click here to logout.</v-btn>
 
         </div>
@@ -68,6 +69,7 @@ export default {
   data() {
     return {
       valid: false,
+      updating: false,
 
       image: '',
 
@@ -95,22 +97,17 @@ export default {
       this.email = user.email
       this.password = ''
     },
-    handleUpdateSettings() {
+    async handleUpdateSettings() {
+      this.updating = true
       const data = {
-        user: {
-          image: this.image,
-          username: this.username,
-          bio: this.bio,
-          email: this.email
-        }
+        image: this.image,
+        bio: this.bio,
+        password: this.password
       }
-      if (this.password) {
-        data.user.password = this.password
-      }
-      this.$axios.put(`/user`, data).then(res => {
-        this.$store.commit('setUser', res.data.user)
-        this.$router.push(`/profile/${res.data.user.username}`)
-      })
+
+      await this.$store.dispatch('auth/updateUser', data)
+
+      this.updating = false
     },
     async handleLogout() {
       await this.$store.dispatch('auth/logoutUser')

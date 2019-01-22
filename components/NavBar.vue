@@ -29,7 +29,7 @@
               </li>
               <li class="nav-item">
                 <nuxt-link 
-                  :to="'/user'" 
+                  :to="'/user/' + user.username" 
                   class="nav-link">
                   <img 
                     :src="user.image || 'https://static.productionready.io/images/smiley-cyrus.jpg'" 
