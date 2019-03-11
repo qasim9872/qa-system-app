@@ -9,20 +9,57 @@
       class="container" 
       column 
       wrap>
+
+
       <ProfileHeader
         :user="userData"
         :personal="personal"
       />
+
+      <v-layout 
+        class="pt-2" 
+        justify-center>
+
+        <v-tabs
+          v-model="currentTab" 
+          dark 
+          fixed-tabs>
+          <v-tab
+            v-for="(tab) in tabs"
+            :key="tab"
+            :to="'#'+tab"
+          >
+            {{ tab }}
+          </v-tab>
+        </v-tabs>
+      </v-layout>
+
+      <v-tabs-items v-model="currentTab">
+        <v-tab-item
+          v-for="(tab, index) in tabs"
+          :key="index"
+          :value="tab"
+        >
+          <v-card flat>
+            <v-card-text>
+              {{ tab }}
+            </v-card-text>
+          </v-card>
+        </v-tab-item>
+      </v-tabs-items>
+
     </v-layout>
   </v-container>
 </template>
 
 <script>
 import ProfileHeader from './ProfileHeader'
+import ResultList from './ResultList'
 
 export default {
   components: {
-    ProfileHeader
+    ProfileHeader,
+    ResultList
   },
   props: {
     user: {
@@ -34,9 +71,19 @@ export default {
       required: true
     }
   },
+  data() {
+    return {
+      tabs: ['asked', 'liked', 'disliked'],
+      currentTab: 'asked',
+      currentTabIndex: 0
+    }
+  },
   computed: {
     userData() {
       return this.user
+    },
+    askedQuestion() {
+      return this.user.asked
     }
   }
 }

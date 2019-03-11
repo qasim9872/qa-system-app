@@ -10,7 +10,7 @@ export const actions = {
 
     this.$toast.success('registration successful')
   },
-  async loginUser(/*{ commit, dispatch }*/ context, params) {
+  async loginUser(context, params) {
     await this.$auth.loginWith('local', {
       data: params
     })

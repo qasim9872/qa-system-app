@@ -10,6 +10,12 @@
             v-model="valid">
 
             <v-text-field
+              v-model="name"
+              readonly
+              label="Name"
+            />
+
+            <v-text-field
               v-model="image"
               label="URL of profile picture"
             />
@@ -71,6 +77,7 @@ export default {
       valid: false,
       updating: false,
 
+      name: '',
       image: '',
 
       username: '',
@@ -91,6 +98,7 @@ export default {
   methods: {
     getSettings() {
       const user = this.$store.getters['auth/loggedInUser']
+      this.name = user.name
       this.image = user.image
       this.username = user.username
       this.bio = user.bio

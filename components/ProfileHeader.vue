@@ -5,7 +5,7 @@
     class="user-info">
     <v-layout
       row
-      
+      align-center
       justify-center
     >
       <v-card-title 
@@ -23,6 +23,7 @@
       </v-card-title>
       <v-layout 
         wrap 
+        class="my-0"
         justify-center>
         <v-card-text align-center>
           <div class="headline font-weight-bold">
