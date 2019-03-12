@@ -55,7 +55,8 @@ export default {
     },
     canShowMore: {
       type: Boolean,
-      required: true
+      required: true,
+      default: false
     }
   }
 }

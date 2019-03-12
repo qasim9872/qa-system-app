@@ -39,12 +39,14 @@
           v-for="(tab, index) in tabs"
           :key="index"
           :value="tab"
+          class="py-2"
         >
-          <v-card flat>
-            <v-card-text>
-              {{ tab }}
-            </v-card-text>
-          </v-card>
+
+          <result-list
+            :questions-list="getQuestions(tab)"
+            :show-results="showResults(tab)"
+            :can-show-more="false"
+          />
         </v-tab-item>
       </v-tabs-items>
 
@@ -84,6 +86,38 @@ export default {
     },
     askedQuestion() {
       return this.user.asked
+    },
+    likedQuestion() {
+      return this.user.likes
+    },
+    dislikedQuestion() {
+      return this.user.dislikes
+    }
+  },
+  methods: {
+    getQuestions(tabName) {
+      switch (tabName) {
+        case this.tabs[0]:
+          return this.askedQuestion
+        case this.tabs[1]:
+          return this.likedQuestion
+        case this.tabs[2]:
+          return this.dislikedQuestion
+        default:
+          return []
+      }
+    },
+    showResults(tabName) {
+      switch (tabName) {
+        case this.tabs[0]:
+          return this.askedQuestion.length > 0
+        case this.tabs[1]:
+          return this.likedQuestion.length > 0
+        case this.tabs[2]:
+          return this.dislikedQuestion.length > 0
+        default:
+          return false
+      }
     }
   }
 }
