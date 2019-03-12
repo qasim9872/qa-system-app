@@ -1,5 +1,6 @@
 const pkg = require('./package')
-const api_url = require('./config/dev').api_url
+const config = require('config')
+const api_url = config.get('api_url')
 
 module.exports = {
   mode: 'universal',
