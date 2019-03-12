@@ -17,6 +17,8 @@
         :show-results="showResults"
         :can-show-more="canShowMore"
         @showMore="showMore"
+        @like="like"
+        @dislike="dislike"
       />
 
     </v-layout>
@@ -26,6 +28,7 @@
 
 <script>
 import ResultList from '../../components/ResultList'
+import { mapActions } from 'vuex'
 
 export default {
   components: {
@@ -61,7 +64,11 @@ export default {
       }
 
       this.show += this.increment
-    }
+    },
+    ...mapActions({
+      like: 'qsHandler/likeQuestion',
+      dislike: 'qsHandler/dislikeQuestion'
+    })
   }
 }
 </script>

@@ -16,7 +16,10 @@
           <result 
             :data="question"
             hide-title 
-            route />
+            route
+            @like="(id) => $emit('like', id)"
+            @dislike="(id) => $emit('dislike', id)"
+          />
         </v-expansion-panel-content>
       </v-expansion-panel>
     </div>

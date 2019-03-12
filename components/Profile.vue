@@ -46,6 +46,8 @@
             :questions-list="getQuestions(tab)"
             :show-results="showResults(tab)"
             :can-show-more="false"
+            @like="(id) => $emit('like', id)"
+            @dislike="(id) => $emit('dislike', id)"
           />
         </v-tab-item>
       </v-tabs-items>

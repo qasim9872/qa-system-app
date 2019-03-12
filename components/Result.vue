@@ -77,8 +77,8 @@
               dark>
               View Full
             </v-btn>
-            <v-btn @click="like(data._id)">  <v-icon left>thumb_up</v-icon>{{ likes }}</v-btn>
-            <v-btn @click="dislike(data._id)"> <v-icon left>thumb_down</v-icon>{{ dislikes }} </v-btn>
+            <v-btn @click="$emit('like', data._id)">  <v-icon left>thumb_up</v-icon>{{ likes }}</v-btn>
+            <v-btn @click="$emit('dislike', data._id)"> <v-icon left>thumb_down</v-icon>{{ dislikes }} </v-btn>
           </v-layout>
         </v-card-actions>
           
@@ -89,7 +89,6 @@
 
 <script>
 import stats from './QuestionStats'
-import { mapActions } from 'vuex'
 
 export default {
   components: {
@@ -150,11 +149,7 @@ export default {
       return `${index + 1}. Response from ${result.source} ${
         result.lang ? result.lang.toUpperCase() : ''
       }`
-    },
-    ...mapActions({
-      like: 'qsHandler/likeQuestion',
-      dislike: 'qsHandler/dislikeQuestion'
-    })
+    }
   }
 }
 </script>

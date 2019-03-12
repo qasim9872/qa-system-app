@@ -10,7 +10,9 @@
       <div v-if="showResult">
         <result 
           :expand="true"
-          :data="question"/>
+          :data="question"
+          @like="like"
+          @dislike="dislike"/>
       </div>
       <div v-else>
         No question with id {{ qsId }}
@@ -23,6 +25,7 @@
 
 <script>
 import Result from '../../components/Result'
+import { mapActions } from 'vuex'
 
 export default {
   components: {
@@ -59,6 +62,12 @@ export default {
     showResult() {
       return Object.keys(this.question).length > 0
     }
+  },
+  methods: {
+    ...mapActions({
+      like: 'qsHandler/likeQuestion',
+      dislike: 'qsHandler/dislikeQuestion'
+    })
   }
 }
 </script>

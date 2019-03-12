@@ -20,9 +20,11 @@ export const mutations = {
       question => question._id == updatedQuestion._id
     )
 
-    // update the liked and disliked props
-    state.questions[id].likedBy = updatedQuestion.likedBy
-    state.questions[id].dislikedBy = updatedQuestion.dislikedBy
+    if (id != -1) {
+      // update the liked and disliked props
+      state.questions[id].likedBy = updatedQuestion.likedBy
+      state.questions[id].dislikedBy = updatedQuestion.dislikedBy
+    }
   },
 
   remove(state, { question }) {
@@ -60,6 +62,7 @@ export const actions = {
       const liked = await this.$axios.$post('api/v1/question/like', {
         question: questionId
       })
+
       commit('update', liked)
     } else {
       this.$toast.error('Please sign in to like questions')
