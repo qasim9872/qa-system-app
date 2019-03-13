@@ -33,6 +33,11 @@ export const mutations = {
 }
 
 export const actions = {
+  async fetchExampleQuestionList() {
+    const res = await this.$axios.$get('api/v1/question/list')
+
+    return res
+  },
   getQuestionData({ state }, id) {
     const found = state.questions.find(value => value._id == id)
     return found
