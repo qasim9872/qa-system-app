@@ -20,7 +20,7 @@
           :value="query"
           class="font-weight-bold pa-3 white--text"
           label="Sparql query"
-          background-color="primary"
+          
           flat
           box
           readonly
@@ -33,7 +33,7 @@
             :value="result.value"
             :label="getLabel(result, index)"
             class="font-weight-bold px-3 white--text"
-            background-color="primary"
+            
             auto-grow
             flat
             box

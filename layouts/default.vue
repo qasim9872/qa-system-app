@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <v-app>
     <nav-bar/>
     <nuxt/>
-  </div>
+  </v-app>
 </template>
 
 <script>
@@ -13,3 +13,9 @@ export default {
   }
 }
 </script>
+
+<style>
+html {
+  padding-bottom: 0;
+}
+</style>

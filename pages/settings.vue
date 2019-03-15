@@ -18,6 +18,7 @@
             <v-text-field
               v-model="image"
               label="URL of profile picture"
+              clearable
             />
 
             <v-text-field

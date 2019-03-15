@@ -9,7 +9,6 @@
 
 </template>
 
-
 <script>
 import Profile from '../../components/Profile'
 

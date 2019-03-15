@@ -13,21 +13,34 @@
           </div>
 
           <div class="pt-3">
-            <form>
-              <fieldset>
-                <fieldset class="form-group">
-                  <input 
-                    v-model="question" 
-                    type="text" 
-                    class="text-xs-center form-control form-control-lg" 
-                    placeholder="Your question here">
-                </fieldset>
-                <button 
-                  class="btn btn-lg btn-primary pull-xs-right" 
-                  type="submit" 
-                  @click.stop.prevent="askAway">Ask away</button>
-              </fieldset>
-            </form>
+            <v-card>
+              
+              <v-card-text>
+               
+                <v-combobox
+                  v-model="question" 
+                  :items="examples"
+                  clearable
+                  persistent-hint
+                  solo
+                  hide-details
+                  placeholder="Your question here"/>
+              </v-card-text>
+
+              <v-card-actions>
+                <v-layout
+                  align-center
+                  justify-center
+                  class="ma-0"
+                >
+                  
+                  <v-btn 
+                    color="#5cb85c" 
+                    @click="askAway">  <v-icon left>search</v-icon>Ask away</v-btn>
+                </v-layout>
+              </v-card-actions>
+
+            </v-card>
           </div>
         </div>
 
@@ -40,9 +53,23 @@
 
 <script>
 export default {
+  async asyncData({ store }) {
+    const exampleQuestions = await store.dispatch(
+      'qsHandler/fetchExampleQuestionList'
+    )
+
+    return {
+      exampleQuestions
+    }
+  },
   data() {
     return {
-      question: ''
+      question: null
+    }
+  },
+  computed: {
+    examples() {
+      return this.exampleQuestions
     }
   },
   methods: {

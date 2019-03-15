@@ -8,8 +8,7 @@
     <v-layout 
       class="container" 
       column 
-      wrap>
-
+    >
 
       <ProfileHeader
         :user="userData"
@@ -18,12 +17,14 @@
 
       <v-layout 
         class="pt-2" 
-        justify-center>
+        justify-center
+      >
 
         <v-tabs
           v-model="currentTab" 
           dark 
-          fixed-tabs>
+          fixed-tabs
+          class="fullsize mx-1 px-2">
           <v-tab
             v-for="(tab) in tabs"
             :key="tab"
@@ -31,26 +32,25 @@
           >
             {{ tab }}
           </v-tab>
+          <v-tabs-items v-model="currentTab">
+            <v-tab-item
+              v-for="(tab, index) in tabs"
+              :key="index"
+              :value="tab"
+              class="py-2"
+            >
+              <result-list
+                :questions-list="getQuestions(tab)"
+                :show-results="showResults(tab)"
+                :can-show-more="false"
+                @like="(id) => $emit('like', id)"
+                @dislike="(id) => $emit('dislike', id)"
+              />
+            </v-tab-item>
+          </v-tabs-items>
         </v-tabs>
       </v-layout>
 
-      <v-tabs-items v-model="currentTab">
-        <v-tab-item
-          v-for="(tab, index) in tabs"
-          :key="index"
-          :value="tab"
-          class="py-2"
-        >
-
-          <result-list
-            :questions-list="getQuestions(tab)"
-            :show-results="showResults(tab)"
-            :can-show-more="false"
-            @like="(id) => $emit('like', id)"
-            @dislike="(id) => $emit('dislike', id)"
-          />
-        </v-tab-item>
-      </v-tabs-items>
 
     </v-layout>
   </v-container>
@@ -124,3 +124,9 @@ export default {
   }
 }
 </script>
+
+<style>
+.fullsize {
+  flex: auto;
+}
+</style>
