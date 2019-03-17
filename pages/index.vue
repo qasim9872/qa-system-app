@@ -74,6 +74,11 @@ export default {
   },
   methods: {
     async askAway() {
+      if (!this.question) {
+        this.$toast.error('Please provide a question')
+        return
+      }
+
       const answerId = await this.$store.dispatch(
         'qsHandler/fetchAnswer',
         this.question

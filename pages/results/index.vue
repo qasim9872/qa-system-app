@@ -8,7 +8,7 @@
     <v-layout 
       class="container"
       column 
-      wrap>
+    >
       
       <h1 class="text-xs-center">All questions</h1>
 
