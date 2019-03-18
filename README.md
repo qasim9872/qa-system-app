@@ -1,6 +1,6 @@
 # qa-system-app
 
-> My super-duper Nuxt.js project
+> This is a submodule for question answering system. The main repository can be found at: https://github.com/qasim9872/question-answering-system
 
 ## Build Setup
 
