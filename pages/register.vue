@@ -104,11 +104,11 @@ export default {
         })
 
         await this.$store.dispatch('auth/loginUser', {
-          name: this.name,
-          username: this.username,
           email: this.email,
           password: this.password
         })
+
+        this.$router.push('/')
       } catch (err) {
         console.error('Error registering user: ', err)
       }

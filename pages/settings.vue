@@ -120,6 +120,7 @@ export default {
     },
     async handleLogout() {
       await this.$store.dispatch('auth/logoutUser')
+      this.$router.push('/')
     }
   }
 }
