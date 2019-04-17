@@ -53,6 +53,7 @@
 
 <script>
 export default {
+  transition: 'tweakOpacity',
   async asyncData({ store }) {
     const exampleQuestions = await store.dispatch(
       'qsHandler/fetchExampleQuestionList'

@@ -28,6 +28,7 @@ import Result from '../../components/Result'
 import { mapActions } from 'vuex'
 
 export default {
+  transition: 'tweakOpacity',
   components: {
     Result
   },

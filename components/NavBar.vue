@@ -12,12 +12,17 @@
           <li class="nav-item">
             <nuxt-link 
               to="/" 
-              class="nav-link">Home</nuxt-link>
+              class="nav-link"><i class="ion-home"/>&nbsp;Home</nuxt-link>
           </li>
           <li class="nav-item">
             <nuxt-link 
               to="/results" 
               class="nav-link"><i class="ion-search"/>&nbsp;History</nuxt-link>
+          </li>
+          <li class="nav-item">
+            <nuxt-link 
+              to="/stats" 
+              class="nav-link"><i class="ion-stats-bars"/>&nbsp;Stats</nuxt-link>
           </li>
 
           <template v-if="isAuthenticated">

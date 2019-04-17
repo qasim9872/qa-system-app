@@ -31,6 +31,7 @@ import ResultList from '../../components/ResultList'
 import { mapActions } from 'vuex'
 
 export default {
+  transition: 'tweakOpacity',
   components: {
     ResultList
   },

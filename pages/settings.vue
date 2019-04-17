@@ -73,6 +73,7 @@
 <script>
 export default {
   middleware: 'auth',
+  transition: 'tweakOpacity',
   data() {
     return {
       valid: false,

@@ -61,6 +61,7 @@ import { validateEmail, validateUsername } from '../utils/helper'
 
 export default {
   middleware: 'guest',
+  transition: 'tweakOpacity',
   data() {
     return {
       valid: false,

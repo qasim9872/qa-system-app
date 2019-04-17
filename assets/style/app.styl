@@ -1,2 +1,10 @@
 // Import Vuetify styling
 @require '~vuetify/src/stylus/main.styl'
+.tweakOpacity-enter-active,
+.tweakOpacity-leave-active {
+  transition: opacity 0.4s ease-out;
+}
+.tweakOpacity-enter,
+.tweakOpacity-leave-active {
+  opacity: 0;
+}

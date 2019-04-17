@@ -13,6 +13,7 @@
 import Profile from '../../components/Profile'
 
 export default {
+  transition: 'tweakOpacity',
   components: {
     Profile
   },

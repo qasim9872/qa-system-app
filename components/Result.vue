@@ -72,7 +72,7 @@
           >
             <v-btn 
               v-if="route"
-              :href="routeLink"
+              :to="routeLink"
               class="px-3"
               dark>
               View Full

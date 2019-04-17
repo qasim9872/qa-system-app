@@ -7,5 +7,14 @@ export const actions = {
     } catch (err) {
       return null
     }
+  },
+  async getStats() {
+    try {
+      const res = await this.$axios.get(`api/v1/stats/overall`)
+      const stats = res.data
+      return stats
+    } catch (err) {
+      return null
+    }
   }
 }
