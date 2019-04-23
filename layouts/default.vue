@@ -2,14 +2,18 @@
   <v-app>
     <nav-bar/>
     <nuxt/>
+    <website-footer/>
   </v-app>
 </template>
 
 <script>
 import NavBar from '@/components/NavBar'
+import WebsiteFooter from '@/components/WebsiteFooter'
+
 export default {
   components: {
-    NavBar
+    NavBar,
+    WebsiteFooter
   }
 }
 </script>

@@ -25,6 +25,23 @@
       </v-flex>
     </v-layout>
 
+    <v-layout
+      class="contain"
+      justify-space-around
+      fill-height>
+      <v-flex
+        v-for="stat in statsCardsSecond"
+        :key="stat.icon"
+        class="ma-3"
+        xs12
+        sm6
+        wrap>
+        <stat-card 
+          :value="stat" 
+          smaller/>
+      </v-flex>
+    </v-layout>
+
     <v-card
       color="white"
       class="pa-4 bent-card">
@@ -83,6 +100,22 @@ export default {
           subheader: 'Failed',
           icon: 'close',
           color: 'red'
+        }
+      ]
+    },
+    statsCardsSecond() {
+      return [
+        {
+          header: this.stats.totalLikes,
+          subheader: 'Total Likes',
+          icon: 'thumb_up',
+          color: '#5cb85c'
+        },
+        {
+          header: this.stats.totalDislikes,
+          subheader: 'Total Dislikes',
+          icon: 'thumb_down',
+          color: '#5cb85c'
         }
       ]
     }
